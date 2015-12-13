@@ -2,23 +2,65 @@ body {
   margin: 0 auto;
   max-width: 1024px;
   text-align: center;
+  position: relative;
+}
+
+:focus {
+  outline: none;
+}
+
+h1 {
+  font-size: 4rem;
 }
 
 ul {
   margin: 0;
   padding: 0;
+  z-index: 1;
+  position: relative;
 }
 
 li {
   list-style-type: none;
   width: 8%;
   border: 5px solid black;
-  float: left;
-  height: 50vh;
+  display: inline-block;
+  height: 17vh;
   margin-right: 1%;
   font-size: 3rem;
+  padding-top: 3rem;
+  background-color: #fff;
 }
 
 li:last-of-type {
   margin-right: 0;
+}
+
+#dice {
+  clear: both;
+  display: block;
+  min-width: 100px;
+  margin: 10vh auto 0 auto;
+  background-color: white;
+  color: red;
+  border: 5px solid red;
+  padding: .5rem;
+  font-size: 1.6rem;
+}
+
+#line {
+  border-bottom: 10px solid black;
+  position: absolute;
+  width: 100%;
+  top: 28vh;
+}
+
+.selected {
+  background-color: red;
+}
+
+.thumbOpened {
+  transform: rotateX(-102deg);
+  transform-origin: 8px;
+  transition: .5s linear;
 }
