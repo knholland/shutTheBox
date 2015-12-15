@@ -1,14 +1,15 @@
 html {
-  /*background-image: url('../img/woodBg.png');
-  background-size: cover;*/
+  background-color: #3b3131;
 }
 
 body {
   margin: 0 auto;
-  max-width: 1024px;
+  width: 95%;
   text-align: center;
   position: relative;
   font-family: 'Droid Sans', sans-serif;
+  color: #ABB6BE;
+  font-weight: 400;
 }
 
 :focus {
@@ -18,9 +19,9 @@ body {
 h1 {
   font-size: 7rem;
   font-weight: 700;
-  font-family: 'Chewy', cursive;
-  color: #f8391c;
-  text-shadow: 1px 1px #e35238;
+  color: #ABB6BE;
+  letter-spacing: -6px;
+  margin: 9vh auto;
 }
 
 ul {
@@ -28,12 +29,13 @@ ul {
   padding: 0;
   z-index: 1;
   position: relative;
+  background: url('../img/bar.svg') no-repeat center;
+  background-size: 94%;
 }
 
 li {
   list-style-type: none;
   width: 8%;
-  /*border: 5px solid black;*/
   display: inline-block;
   height: 19vh;
   margin-right: 1%;
@@ -44,8 +46,7 @@ li {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  color: rgba(0,0,0,0.6);
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+  color: #333;
 }
 
 li:last-of-type {
@@ -53,37 +54,51 @@ li:last-of-type {
 }
 
 footer {
-  margin-top: 30vh;
+  margin-top: 5%;
 }
 
 #dice {
   clear: both;
   display: block;
-  min-width: 100px;
+  width: 20%;
   margin: 0 auto;
-  color: #333;
+  color: #ABB6BE;
   padding: .5rem;
   font-size: 1.6rem;
   cursor: pointer;
 }
 
 #infoContainer {
-  margin-top: 11vh;
+  margin: 5% auto;
 }
 
 #info {
   font-size: 3rem;
-  font-family: 'Chewy', cursive;
-  color: #f8391c;
+  letter-spacing: -3px;
+  margin: 0 auto;
+}
+
+#newGame {
+  background: transparent;
+  color: #ABB6BE;
+  font-size: 2rem;
+  border: 1px solid #ABB6BE;
+  padding: 2%;
+  cursor: pointer;
+  opacity: 0;
+  margin: 5% auto;
+  display: none;
 }
 
 #di1, #di2 {
   border: 3px solid #000;
-  padding: 1rem;
+  padding: 13%;
+  border-radius: 24%;
+  background-color: #fff;
+  color: #333;
 }
 
 #line {
-  /*border-bottom: 10px solid black;*/
   position: absolute;
   width: 100%;
   top: 38vh;
@@ -94,64 +109,7 @@ footer {
 }
 
 .flipped {
-  transform: rotateX(-102deg);
+  transform: rotateX(172deg);
   transform-origin: 8px;
   transition: .5s linear;
-}
-
-
-
-
-
-
-
-.wrap {
-  perspective: 800px;
-  perspective-origin: 50% 100px;
-}
-
-.cube {
-  position: relative;
-  width: 100px;
-  margin: 0 auto;
-  transform-style: preserve-3d;
-}
-
-.cube div {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 3px solid black;
-}
-
-@keyframes spin {
-  from { transform: rotateY(0); }
-  to { transform: rotateY(360deg); }
-}
-
-.cube {
-  animation: spin 10s infinite linear;
-}
-
-.back {
-  transform: translateZ(-100px) rotateY(180deg);
-}
-.right {
-  transform: rotateY(-270deg) translateX(100px);
-  transform-origin: top right;
-}
-.left {
-  transform: rotateY(270deg) translateX(-100px);
-  transform-origin: center left;
-}
-.top {
-  transform: rotateX(-90deg) translateY(-100px);
-  transform-origin: top center;
-}
-.bottom {
-  transform: rotateX(90deg) translateY(100px);
-  transform-origin: bottom center;
-}
-.front {
-  transform: translateZ(100px);
 }

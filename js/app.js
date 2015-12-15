@@ -3,8 +3,13 @@ $(function() {
   var dice1;
   var dice2;
   var tilesLeft = [1,2,3,4,5,6,7,8,9]; //keep track of tiles left
-  // var totalSelected = 0;
-  // console.log('TOTAL SELECTED: ' + totalSelected);
+  var totalThisTurn = 0;
+  var tilesLeftTotal = 0;
+
+  //Start a new game
+  $('#newGame').on('click', function() {
+    location.reload();
+  });
 
   $('#dice').on("click", function() {
     dice1 = rollTheDice();
@@ -12,85 +17,108 @@ $(function() {
 
     $('#di1').text(dice1);
     $('#di2').text(dice2);
-    $('#info').text('Click on tiles that equal up to the ' + (dice1 + dice2) + ' you rolled!');
+    $('#info').text('Click on tiles that equal ' + (dice1 + dice2) + '.');
 
     var moves = false;
-    var tilesLeftTotal = 0;
+
     possibleMoves();
 
-    if(moves) {
+    if(moves === 'win') {
+      $('#info').text('You closed the box! You win!!').css('opacity','1').animate({
+        opacity: '0'
+      }, 2000, function() {
+         $('#newGame').css('display','block').animate({
+            opacity: '1'
+          }, 2000);
+        });
+    } else if(moves) {
+      totalThisTurn = 0; //reset Total of Tiles selected each dice click
       selectTiles();
-
     } else {
-      $('#info').text('Game over. No more possible moves.');
-    }
-
+      $('#info').text('Game over.').css('opacity','1').animate({
+          opacity: '0'
+        }, 2000, function() {
+            $('#info').text('Final Score: ' + finalScore()).css('opacity', '0').animate({
+              opacity: '1'
+            }, 2000, function() {
+              $('#newGame').css('display','block').animate({
+                opacity: '1'
+              }, 2000);
+          });
+      });
+    } // end of else
     function possibleMoves() {
-      for(var t = 0; t < tilesLeft.length; t++) {
-        if(tilesLeft[t] % dice1 === 0 || tilesLeft[t] % dice2 === 0) {
-          console.log(tilesLeft[t]);
-          return moves = true;
-        } else if (tilesLeft.indexOf(dice1 + 1) === -1 || tilesLeft.indexOf(dice2 + 1) === -1) {
-          console.log(tilesLeft[t]);
-          return moves = true;
-        }
-        tilesLeftTotal += tilesLeft[t];
+      if(tilesLeft.length === 0) {
+        moves = 'win';
+      } else {
+        for(var i = 0; i < tilesLeft.length; i++) {
+          if(tilesLeft[i] === dice1 + dice2) {
+             console.log('This is equal to dice1 + dice2 ' + tilesLeft[i]);
+             moves = true;
+          }
+          var runningTotal = tilesLeft[i];
+
+          for(var j = i + 1; j < tilesLeft.length; j++) {
+             runningTotal += tilesLeft[j];
+
+             if(tilesLeft[j] + tilesLeft[i] === dice1 + dice2) {
+                console.log('This is equal to dice ' + tilesLeft[i] + tilesLeft[j]);
+                moves = true;
+             }
+
+             if(runningTotal === dice1 + dice2) {
+               console.log("RT is equal to dice " + runningTotal);
+               moves = true;
+             }
+          } //end of inner loop
+        } //end of tilesLeft loop
       }
-    } //end of possible moves
+    } //end of possibleMoves()
   }); //end of dice click()
+
+  var finalScore = function () {
+    var win = 0;
+    for(var k = 0; k < tilesLeft.length; k++) {
+      win += tilesLeft[k];
+    }
+    return win;
+  }
 
   //allow user to select tiles
   function selectTiles() {
-    $('li').on("click", function() {
+    $('li').off().on("click", function() {
       var selected = [];
-      var totalSelected = 0;
-      console.log('TOTAL SELECTED: ' + totalSelected);
       var $selectedTile = $(this).index(); //index of li clicked
       var $tile = $selectedTile + 1; //numeric value of each tile selected
       var count = 0;
 
-      if(totalSelected < (dice1 + dice2)) {
-        console.log('smaller');
-        tileSelection();
+      selected.push($tile);
 
+      for(var s = 0; s < selected.length; s++) {
+        totalThisTurn += selected[s];
+      }
+
+      var $removeTile = tilesLeft.indexOf($tile);
+      tilesLeft.splice($removeTile,1); //remove selected tile from available tiles
+
+      for(var i = 0; i < tilesLeft.length; i++) {
+        count += tilesLeft[i];
+      }
+
+      if ($tile > dice1 + dice2) { //Tile selected is greater than the total of dice roll.
+          $('#info').text('Tile selected is more than the dice total. Please roll again.');
+      }
+
+      if(totalThisTurn <= (dice1 + dice2)) {
         //Conditions for game logic
-        if(totalSelected === dice1 + dice2) { //If a tile is already flipped, player cannot flip again.
-          $(this).addClass('flipped').removeClass('tile').unbind('click');
+        if(totalThisTurn === dice1 + dice2) { //If a tile is already flipped, player cannot flip again.
+          $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
           $('#info').text('Roll Again!');
-        } else if (totalSelected > dice1 + dice2) {
-          $('#info').text('Tile selected is more than the dice total. Please try again.');
-        } else if (totalSelected < dice1 + dice2 && totalSelected <= dice1 + dice2) { //Allow multiple tile flips up to total of dice
-          $(this).addClass('flipped').removeClass('tile').unbind('click');
+        } else if (totalThisTurn <= dice1 + dice2) { //Allow multiple tile flips up to total of dice
+          //ORIGINAL (totalThisTurn < dice1 + dice2 && totalThisTurn <= dice1 + dice2)
+          $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
         }
       }
-      //tileSelection();
-
-      //process selected tile
-      function tileSelection() {
-        selected.push($tile);
-
-        for(var s = 0; s < selected.length; s++) {
-          totalSelected += selected[s];
-        }
-
-        console.log('Selected Tiles:' + selected.length);
-        console.log('Selected Total: ' + totalSelected);
-
-        var $test = tilesLeft.indexOf($tile);
-        tilesLeft.splice($test,1); //remove selected tile from available tiles
-
-        console.log('Selected: ' + selected);
-        console.log('Tiles Left Before Count: ' + tilesLeft);
-
-        for(var i = 0; i < tilesLeft.length; i++) {
-          count += tilesLeft[i];
-        }
-
-        console.log('Tiles Left Total: ' + count);
-        console.log('Dice 1: ' + dice1);
-        console.log('Dice 2: ' + dice2);
-        console.log('Tiles Left After Count: ' + tilesLeft);
-      }//end of tileSelection()
     }); //end of tile click()
   }
 
