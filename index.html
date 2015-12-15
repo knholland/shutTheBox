@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Shut The Box</title>
+  <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="js/app.js"></script>
@@ -14,18 +16,40 @@
 <section>
   <div id="line"></div>
   <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
+    <li class="tile">1</li>
+    <li class="tile">2</li>
+    <li class="tile">3</li>
+    <li class="tile">4</li>
+    <li class="tile">5</li>
+    <li class="tile">6</li>
+    <li class="tile">7</li>
+    <li class="tile">8</li>
+    <li class="tile">9</li>
   </ul>
 </section>
-<button id="dice">Roll The Dice</button>
-<p></p>
+<section id="infoContainer">
+  <div>
+    <p id="info">Roll the dice!</p>
+  </div>
+</section>
+<section id="diceContainer">
+  <div id="dice">
+    <span id="di1">?</span>
+    <span id="di2">?</span>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cube">
+    <div class="front">1</div>
+    <div class="back">2</div>
+    <div class="top">3</div>
+    <div class="bottom">4</div>
+    <div class="left">5</div>
+    <div class="right">6</div>
+  </div>
+</div>
+
+<footer><p id="copyright">&#169; 2015 Katie Owen</p></footer>
 </body>
 </html>
