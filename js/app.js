@@ -23,15 +23,7 @@ $(function() {
 
     possibleMoves();
 
-    if(moves === 'win') {
-      $('#info').text('You closed the box! You win!!').css('opacity','1').animate({
-        opacity: '0'
-      }, 2000, function() {
-         $('#newGame').css('display','block').animate({
-            opacity: '1'
-          }, 2000);
-        });
-    } else if(moves) {
+    if(moves) {
       totalThisTurn = 0; //reset Total of Tiles selected each dice click
       selectTiles();
     } else {
@@ -48,31 +40,24 @@ $(function() {
       });
     } // end of else
     function possibleMoves() {
-      if(tilesLeft.length === 0) {
-        moves = 'win';
-      } else {
-        for(var i = 0; i < tilesLeft.length; i++) {
-          if(tilesLeft[i] === dice1 + dice2) {
-             console.log('This is equal to dice1 + dice2 ' + tilesLeft[i]);
+      for(var i = 0; i < tilesLeft.length; i++) {
+        if(tilesLeft[i] === dice1 + dice2) {
+           moves = true;
+        }
+        var runningTotal = tilesLeft[i];
+
+        for(var j = i + 1; j < tilesLeft.length; j++) {
+           runningTotal += tilesLeft[j];
+
+           if(tilesLeft[j] + tilesLeft[i] === dice1 + dice2) {
+              moves = true;
+           }
+
+           if(runningTotal === dice1 + dice2) {
              moves = true;
-          }
-          var runningTotal = tilesLeft[i];
-
-          for(var j = i + 1; j < tilesLeft.length; j++) {
-             runningTotal += tilesLeft[j];
-
-             if(tilesLeft[j] + tilesLeft[i] === dice1 + dice2) {
-                console.log('This is equal to dice ' + tilesLeft[i] + tilesLeft[j]);
-                moves = true;
-             }
-
-             if(runningTotal === dice1 + dice2) {
-               console.log("RT is equal to dice " + runningTotal);
-               moves = true;
-             }
-          } //end of inner loop
-        } //end of tilesLeft loop
-      }
+           }
+        } //end of inner loop
+      } //end of tilesLeft loop
     } //end of possibleMoves()
   }); //end of dice click()
 
@@ -115,10 +100,19 @@ $(function() {
           $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
           $('#info').text('Roll Again!');
         } else if (totalThisTurn <= dice1 + dice2) { //Allow multiple tile flips up to total of dice
-          //ORIGINAL (totalThisTurn < dice1 + dice2 && totalThisTurn <= dice1 + dice2)
           $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
         }
       }
+
+      if(tilesLeft.length === 0) {
+        $('#info').text('You closed the box! You win!!').css('opacity','0').animate({
+          opacity: '1'
+        }, 2000, function() {
+           $('#newGame').css('display','block').animate({
+              opacity: '1'
+            }, 2000);
+          });
+      }//tilesLeft winner
     }); //end of tile click()
   }
 
