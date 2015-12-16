@@ -92,15 +92,13 @@ footer {
 
 #di1, #di2 {
   border: 3px solid #000;
-  /*padding: 4%;*/
-  width: 40%;
+  width: 34%;
   height: 0;
-  padding-bottom: 40%;
+  padding-bottom: 34%;
   border-radius: 24%;
   background-color: #fff;
   color: #333;
   background-image: url('../img/dice.svg');
-  /*background-position: 104% 0;*/
   background-position-y: 0;
   background-position-x: 104%;
   background-size: 800%;
