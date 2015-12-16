@@ -30,7 +30,6 @@ ul {
   z-index: 1;
   position: relative;
   background: url('../img/bar.svg') no-repeat center;
-  background-size: 94%;
 }
 
 li {
@@ -125,4 +124,19 @@ footer {
   transform-origin: 8px;
   transition: .5s linear;
   color: transparent;
+}
+
+@media only screen and (min-width: 813px) {
+  ul {
+    background-size: 94%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 11px;
+  }
+  #dice {
+    width: 22%;
+  }
 }
