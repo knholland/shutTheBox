@@ -6,7 +6,7 @@ Roll the dice, and flip the tiles that equal up to your dice total for that turn
 The lower your score, the better you did.
 Flip all the tiles to win the game!
 
-## Technologies Used:
+## Used:
 + HTML
 + CSS
 + jQuery
