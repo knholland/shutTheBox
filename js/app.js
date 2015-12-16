@@ -20,7 +20,7 @@ $(function() {
 
     $('#di2').animate({
       'background-position-x': backgrounds[6]
-    },2000, 'linear');
+    },200, 'linear');
   });//end of newGame click()
 
   $('#dice').on('click', function() {

@@ -6,7 +6,7 @@ Roll the dice, and flip the tiles that equal up to your dice total for that turn
 The lower your score, the better you did.
 Flip all the tiles to win the game!
 
-[Github](http://khowen.github.io/shutTheBox/)
+[http://khowen.github.io/shutTheBox/](http://khowen.github.io/shutTheBox/)
 
 ## Project Notes:
 I chose to make this game because the logic involved for the tiles available to play versus the dice total made for a challenge.
