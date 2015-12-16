@@ -1,12 +1,12 @@
 # Shut The Box
 
-# Instructions:
+## Instructions:
 Shut the Box is a game that is based on chance.
 Roll the dice, and flip the tiles that equal up to your dice total for that turn.
 The lower your score, the better you did.
 Flip all the tiles to win the game!
 
-# Technologies Used:
+## Technologies Used:
 + HTML
 + CSS
 + jQuery
@@ -15,5 +15,5 @@ Flip all the tiles to win the game!
 + Sublime Text 3
 + Google Fonts
 
-# Wireframe:
+## Wireframe:
 ![Wireframe](img/wireframe.png "wireframe")
