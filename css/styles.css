@@ -21,7 +21,7 @@ h1 {
   font-weight: 700;
   color: #ABB6BE;
   letter-spacing: -6px;
-  margin: 9vh auto;
+  margin: 10% auto;
 }
 
 ul {
@@ -92,10 +92,24 @@ footer {
 
 #di1, #di2 {
   border: 3px solid #000;
-  padding: 13%;
+  /*padding: 4%;*/
+  width: 40%;
+  height: 0;
+  padding-bottom: 40%;
   border-radius: 24%;
   background-color: #fff;
   color: #333;
+  background-image: url('../img/dice.svg');
+  /*background-position: 104% 0;*/
+  background-position-y: 0;
+  background-position-x: 104%;
+  background-size: 800%;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+#di1 {
+  margin-right: 7%;
 }
 
 #line {
@@ -112,4 +126,5 @@ footer {
   transform: rotateX(172deg);
   transform-origin: 8px;
   transition: .5s linear;
+  color: transparent;
 }

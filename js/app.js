@@ -5,18 +5,37 @@ $(function() {
   var tilesLeft = [1,2,3,4,5,6,7,8,9]; //keep track of tiles left
   var totalThisTurn = 0;
   var tilesLeftTotal = 0;
+  var backgrounds = ['-3%','15%','33%','51%','68%','86%','104%'];
 
   //Start a new game
   $('#newGame').on('click', function() {
-    location.reload();
-  });
+    tilesLeft = [1,2,3,4,5,6,7,8,9];
+    $('li').removeClass('flipped');
+    $('#info').text('Roll the dice!');
+    $('#newGame').css('display','none');
+    $('#di1').animate({
+      'background-position-x': backgrounds[6],
+      'background-position-y': '0'
+    },200,'linear');
 
-  $('#dice').on("click", function() {
+    $('#di2').animate({
+      'background-position-x': backgrounds[6]
+    },2000, 'linear');
+  });//end of newGame click()
+
+  $('#dice').on('click', function() {
     dice1 = rollTheDice();
     dice2 = rollTheDice();
 
-    $('#di1').text(dice1);
-    $('#di2').text(dice2);
+    $('#di1').animate({
+      'background-position-x': backgrounds[dice1-1],
+      'background-position-y': '0'
+    },200,'linear');
+
+    $('#di2').animate({
+      'background-position-x': backgrounds[dice2-1]
+    },200, 'linear');
+
     $('#info').text('Click on tiles that equal ' + (dice1 + dice2) + '.');
 
     var moves = false;
@@ -97,10 +116,10 @@ $(function() {
       if(totalThisTurn <= (dice1 + dice2)) {
         //Conditions for game logic
         if(totalThisTurn === dice1 + dice2) { //If a tile is already flipped, player cannot flip again.
-          $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
+          $(this).addClass('flipped').unbind('click');
           $('#info').text('Roll Again!');
         } else if (totalThisTurn <= dice1 + dice2) { //Allow multiple tile flips up to total of dice
-          $(this).addClass('flipped').css('color','transparent').removeClass('tile').unbind('click');
+          $(this).addClass('flipped').unbind('click');
         }
       }
 
